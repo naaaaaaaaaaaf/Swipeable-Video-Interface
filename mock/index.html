@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Swipeable Video Interface</title>
+    <style>
+        /* ここに必要に応じてスタイルを追加 */
+        #video-container {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+        video {
+            width: 800px;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.5s ease;
+        }
+        video.paused {
+            /* 一時停止時の視覚的な効果 */
+            /* 例: 透明度を下げる */
+            opacity: 0.7;
+        }
+
+        @keyframes swipeLeft {
+            from {
+                transform: translateX(0%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        @keyframes swipeRight {
+            from {
+                transform: translateX(0%);
+            }
+            to {
+                transform: translateX(100%);
+            }
+        }
+
+        @keyframes swipeUp {
+            from {
+                transform: translateY(0%);
+            }
+            to {
+                transform: translateY(-100%);
+            }
+        }
+
+        @keyframes swipeDown {
+            from {
+                transform: translateY(0%);
+            }
+            to {
+                transform: translateY(100%);
+            }
+        }
+        .swipe-animation {
+            animation-duration: 500ms; /* アニメーションの持続時間 */
+            animation-timing-function: ease-out;
+        }
+        .overlay-buttons {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            z-index: 2;
+        }
+        .overlay-buttons button {
+            width: 80px; /* ボタンの幅 */
+            height: 80px; /* ボタンの高さ */
+            padding: 0;
+            border-radius: 50%; /* 完全な円形 */
+            font-size: 24px; /* アイコンのサイズ */
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        #like-button {
+            background-color: #4CAF50; /* 緑色 */
+        }
+
+        #like-button:hover {
+            background-color: #45a049;
+        }
+
+        #dislike-button {
+            background-color: #f44336; /* 赤色 */
+        }
+
+        #dislike-button:hover {
+            background-color: #d73829;
+        }
+        
+        #play-icon {
+            font-size: 100px; /* アイコンのサイズ */
+            color: white; /* アイコンの色 */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+        #seek-bar {
+            width: 800px;
+            position: absolute;
+            bottom: 10px; /* 動画の下部に配置 */
+        }
+
+    </style>
+</head>
+<body>
+    <div id="video-container">
+        <video id="video-player" autoplay loop>
+            <source src="a.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div id="play-icon" style="display: none;">►</div>
+        <input type="range" id="seek-bar" value="0">
+        <div class="overlay-buttons">
+            <button id="like-button">ボタン例</button>
+            <button id="like-button">ボタン例</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
